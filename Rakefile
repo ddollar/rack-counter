@@ -10,8 +10,13 @@ begin
     gem.email = "<ddollar@gmail.com>"
     gem.homepage = "http://github.com/ddollar/rack-counter"
     gem.authors = ["David Dollar"]
+
+    gem.add_development_dependency "rack-test"
     gem.add_development_dependency "rspec"
-    # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
+
+    gem.add_dependency "memcache-client"
+    gem.add_dependency "rack"
+    gem.add_dependency "system_timer"
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
