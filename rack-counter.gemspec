@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
      "VERSION",
      "lib/rack-counter.rb",
      "lib/rack_counter.rb",
+     "rack-counter.gemspec",
      "spec/rack_counter_spec.rb",
      "spec/rcov.opts",
      "spec/spec.opts",
