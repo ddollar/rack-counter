@@ -9,8 +9,7 @@ class Rack::Counter
     @app      = app
     @options  = options
 
-    memcache.add 'start', Time.now
-    memcache.add 'hits',  0, 0, true
+    reset_stats! unless initialized?
   end
 
   def call(env)
@@ -21,7 +20,7 @@ class Rack::Counter
     end
   end
 
-private ######################################################################
+private
 
   def namespace
     options[:namespace] || 'rack-counter'
@@ -31,8 +30,14 @@ private ######################################################################
     options[:memcache_host] || 'localhost:11211'
   end
 
+## memcached #################################################################
+
   def memcache
     @memcache ||= MemCache.new(memcache_host, :namespace => namespace)
+  end
+
+  def initialized?
+    memcache.get('hits', true)
   end
 
   def record_hit!
@@ -40,14 +45,26 @@ private ######################################################################
   end
 
   def reset_stats!
-    memcache.replace 'start', Time.now
-    memcache.replace 'hits', 0, 0, true
+    memcache.set 'start', Time.now.utc
+    memcache.set 'hits',  0, 0, true
+  end
+
+## stats #####################################################################
+
+  def hits
+    memcache.get('hits', true).to_i
+  end
+
+  def start
+    memcache.get('start')
+  end
+
+  def average_hits_per_second
+    '%0.4f' % (hits.to_f / (Time.now.utc - start))
   end
 
   def stats
-    {
-      'hits' => memcache.get('hits', true).to_i
-    }
+    { 'hits' => hits, 'avg_per_sec' => average_hits_per_second }
   end
 
 end
