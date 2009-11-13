@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "rack-counter"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{Hit counter Rack Middleware using Memcached}
+    gem.description = gem.summary
     gem.email = "<ddollar@gmail.com>"
     gem.homepage = "http://github.com/ddollar/rack-counter"
     gem.authors = ["David Dollar"]

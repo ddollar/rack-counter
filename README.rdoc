@@ -1,6 +1,6 @@
 = rack-counter
 
-Easy hit counter
+Hit counter Rack Middleware using Memcached
 
 == Installation
 
