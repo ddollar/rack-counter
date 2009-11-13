@@ -1,9 +1,23 @@
 = rack-counter
 
-Description goes here.
+Easy hit counter
+
+== Installation
+
+ $ gem install rack-counter --source http://gemcutter.org
+
+== Setup
+
+ use Rack::Counter
+ use Rack::Counter, :namespace => 'mynamespace'
+
+== Usage
+
+ GET /_stats.json
+ 200 OK {"hits":415,"avg_per_sec":"0.5773"}
 
 == Note on Patches/Pull Requests
- 
+
 * Fork the project.
 * Make your feature addition or bug fix.
 * Add tests for it. This is important so I don't break it in a
